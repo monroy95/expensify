@@ -24,6 +24,7 @@ module.exports = {
   },
   devtool: 'cheap-module-source-map',
   devServer: {
-    contentBase: path.join(__dirname, 'public')
+    contentBase: path.join(__dirname, 'public'),
+    historyApiFallback: true // tell em the webserver to return to home if a 404 ocurr
   }
 }
