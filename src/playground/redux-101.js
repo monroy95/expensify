@@ -1,15 +1,33 @@
 import { createStore } from 'redux';
+// Actions - than an object that gets Sent to the store
+// Action generators => functions that return action objects
+const incrementCount = ({ incrementBy = 1 } = {}) => ({
+  type: 'INCREMENT',
+  incrementBy
+});
+// Action generators => functions that return action objects
+const decrementCount = ({ decrementBy = 1 } = {}) => ({
+  type: 'DECREMENT',
+  decrementBy
+})
+// Action generators => functions that return action objects
+const resetCount = () => ({
+  type: 'RESET'
+})
+// Action generators => functions that return action objects
+const setCount = ({ count }) => ({
+  type: 'SET',
+  count
+})
 
 // the first arg is a default state
 const store = createStore((state = { count: 0 }, action) => {
   switch (action.type) {
     case 'INCREMENT':
-      const increment = typeof action.incrementBy === 'number' ? action.incrementBy : 1;
-      return {count: state.count + increment}
+      return {count: state.count + action.incrementBy}
       break;
     case 'DECREMENT':
-      const decrement = typeof action.decrementBy === 'number' ? action.decrementBy : 1;
-      return {count: state.count - decrement}
+      return {count: state.count - action.decrementBy}
       break;
     case 'SET':
       return {count: action.count}
@@ -27,29 +45,15 @@ store.subscribe(() => {
   console.log(store.getState());
 });
 
-// Actions - than an object that gets Sent to the store
-// Increment, decremet, reset <-- Actions changes the store
+// dispatching actions
+store.dispatch(incrementCount({ incrementBy: 5 }))
+// Using action generators
+store.dispatch(incrementCount());
 
+store.dispatch(resetCount());
 
-store.dispatch({
-  type: 'INCREMENT',
-  incrementBy: 5
-});
+store.dispatch(decrementCount());
 
-store.dispatch({
-  type: 'INCREMENT'
-});
+store.dispatch(decrementCount({ decrementBy: 10 }));
 
-store.dispatch({
-  type: 'RESET'
-});
-
-store.dispatch({
-  type: 'DECREMENT',
-  decrementBy: 10
-});
-
-store.dispatch({
-  type: 'SET',
-  count: 101
-});
+store.dispatch(setCount({ count: 202 }));
