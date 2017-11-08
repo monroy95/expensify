@@ -4,10 +4,15 @@ import { createStore } from 'redux';
 const store = createStore((state = { count: 0 }, action) => {
   switch (action.type) {
     case 'INCREMENT':
-      return {count: state.count + 1}
+      const increment = typeof action.incrementBy === 'number' ? action.incrementBy : 1;
+      return {count: state.count + increment}
       break;
     case 'DECREMENT':
-      return {count: state.count - 1}
+      const decrement = typeof action.decrementBy === 'number' ? action.decrementBy : 1;
+      return {count: state.count - decrement}
+      break;
+    case 'SET':
+      return {count: action.count}
       break;
     case 'RESET':
       return {count: 0}
@@ -18,29 +23,33 @@ const store = createStore((state = { count: 0 }, action) => {
   }
 });
 
-console.log(store.getState());
+store.subscribe(() => {
+  console.log(store.getState());
+});
 
 // Actions - than an object that gets Sent to the store
-// Walk, stop_waling, sit, work, stop_working
-
 // Increment, decremet, reset <-- Actions changes the store
+
+
 store.dispatch({
-  type: 'INCREMENT'
+  type: 'INCREMENT',
+  incrementBy: 5
 });
 
 store.dispatch({
   type: 'INCREMENT'
 });
-console.log(store.getState());
 
 store.dispatch({
   type: 'RESET'
 });
 
 store.dispatch({
-  type: 'DECREMENT'
+  type: 'DECREMENT',
+  decrementBy: 10
 });
 
-// I'd like to increment the count
-// Id like to reset the count to zero
-console.log(store.getState());
+store.dispatch({
+  type: 'SET',
+  count: 101
+});
