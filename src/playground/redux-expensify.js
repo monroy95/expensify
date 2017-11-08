@@ -119,6 +119,23 @@ const filtersReducer = (state = defaultStateFiltersReducer, action) => {
   }
 }
 
+// get visible expense
+const getVisibleExpenses = (expenses, { text, sortBy, startDate, endDate }) => {
+  return expenses.filter((expense) => {
+    const startDateMatch = typeof startDate !== 'number' || expense.createdAt >= startDate;
+    const endDateMatch = typeof endDate !== 'number' || expense.createdAt <= endDate;
+    const textMatch = expense.description.toLowerCase().includes(text.toLowerCase());
+
+    return startDateMatch && endDateMatch && textMatch
+  }).sort((a, b) => {
+    if (sortBy === 'date') {
+      return a.createdAt < b.createdAt ? 1 : -1;
+    } else if (sortBy === 'amount') {
+      return a.createdAt > b.createdAt ? -1 : 1;
+    }
+  })
+}
+
 // store creation
 const store = createStore(combineReducers({
     expenses: expensesReducer,
@@ -127,24 +144,26 @@ const store = createStore(combineReducers({
 );
 
 store.subscribe(() => {
-  console.log(store.getState());
+  const state = store.getState()
+  const visibleExpenses = getVisibleExpenses(state.expenses, state.filters)
+  console.log(visibleExpenses);
 });
 
 // add one expense save data in variable to use later 
 const expenseOne = store.dispatch(addExpense({ description: 'Rent', amount: 100 }));
 const expenseTwo = store.dispatch(addExpense({ description: 'Food', amount: 400 }));
-// remove one expense using id from expenseOne
-store.dispatch(removeExpense({ id: expenseOne.expense.id }));
-// Edit a expense data using id from expenseTwo and changing some values
-store.dispatch(editExpense(expenseTwo.expense.id, { amount: 500 }));
-// Set an value for the object filters 
-store.dispatch(setTextFilter('rent'));
-store.dispatch(setTextFilter());
-// Trigger an action to change sortBy value
+// // remove one expense using id from expenseOne
+// store.dispatch(removeExpense({ id: expenseOne.expense.id }));
+// // Edit a expense data using id from expenseTwo and changing some values
+// store.dispatch(editExpense(expenseTwo.expense.id, { amount: 500 }));
+// // Set an value for the object filters 
+// store.dispatch(setTextFilter('ood'));
+// store.dispatch(setTextFilter());
+// // Trigger an action to change sortBy value
 store.dispatch(sortByAmount());
-store.dispatch(sortByDate());
-// Trigger an action to change startDate and EndDate value
-store.dispatch(setStartDate(125));
-store.dispatch(setStartDate());
-store.dispatch(setEndtDate(129));
-store.dispatch(setEndtDate());
+// store.dispatch(sortByDate());
+// // Trigger an action to change startDate and EndDate value
+// store.dispatch(setStartDate(125));
+// store.dispatch(setStartDate());
+// store.dispatch(setEndtDate(129));
+// store.dispatch(setEndtDate());
