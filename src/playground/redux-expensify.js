@@ -18,6 +18,7 @@ const demoState = {
 };
 
 // Actions: 
+
 // ADD_EXPENSE,
 const addExpense = (
   { description = '',
@@ -40,12 +41,41 @@ const removeExpense = ( { id } = {}) => ({
   type: 'REMOVE_EXPENSE',
   id
 })
+
 // EDIT_EXPENSE,
+const editExpense = (id, updates) => ({
+  type: 'EDIT_EXPENSE',
+  id,
+  updates
+})
+
 // SET_TEXT_FILTER,
+const setTextFilter = (text = '') => ({
+  type: 'SET_TEXT',
+  text
+})
+
 // SORT_BY_DATE,
+const sortByDate = () => ({
+  type: 'SORT_BY_DATE'
+})
+
 // SORT_BY_AMOUNT
+const sortByAmount = () => ({
+  type: 'SORT_BY_AMOUNT'
+})
+
 // SET_START_DATE
+const setStartDate = (timeStamp = undefined) => ({
+  type: 'SET_START_DATE',
+  timeStamp
+})
+
 // SET_END_DATE
+const setEndtDate = (timeStamp = undefined) => ({
+  type: 'SET_END_DATE',
+  timeStamp
+})
 
 // EXPENSES REDUCER
 const expensesReducerDefaultState = []
@@ -55,6 +85,16 @@ const expensesReducer = (state = expensesReducerDefaultState, action) => {
       return [...state, action.expense]
     case 'REMOVE_EXPENSE':
       return state.filter(({ id }) => id !== action.id)
+    case 'EDIT_EXPENSE':
+      return state.map((expense) => {
+        if(expense.id === action.id) {
+          return {
+            ...expense,
+            ...action.updates}
+        } else {
+          return expense
+        }
+      });
     default:
       return state;
   }
@@ -64,6 +104,16 @@ const expensesReducer = (state = expensesReducerDefaultState, action) => {
 const defaultStateFiltersReducer = {text: '', sortBy: 'date', startDate: undefined, endDate: undefined}
 const filtersReducer = (state = defaultStateFiltersReducer, action) => {
   switch (action.type) {
+    case 'SET_TEXT':
+      return {...state, text: action.text}
+    case 'SORT_BY_DATE':
+      return {...state, sortBy: 'date'}
+    case 'SORT_BY_AMOUNT':
+      return {...state, sortBy: 'amount'}
+    case 'SET_START_DATE':
+      return {...state, startDate: action.timeStamp}
+    case 'SET_END_DATE':
+      return {...state, endDate: action.timeStamp}
     default:
       return state;
   }
@@ -80,8 +130,21 @@ store.subscribe(() => {
   console.log(store.getState());
 });
 
+// add one expense save data in variable to use later 
 const expenseOne = store.dispatch(addExpense({ description: 'Rent', amount: 100 }));
 const expenseTwo = store.dispatch(addExpense({ description: 'Food', amount: 400 }));
-
-const removeOne = store.dispatch(removeExpense({ id: expenseOne.expense.id }));
-console.log(removeOne);
+// remove one expense using id from expenseOne
+store.dispatch(removeExpense({ id: expenseOne.expense.id }));
+// Edit a expense data using id from expenseTwo and changing some values
+store.dispatch(editExpense(expenseTwo.expense.id, { amount: 500 }));
+// Set an value for the object filters 
+store.dispatch(setTextFilter('rent'));
+store.dispatch(setTextFilter());
+// Trigger an action to change sortBy value
+store.dispatch(sortByAmount());
+store.dispatch(sortByDate());
+// Trigger an action to change startDate and EndDate value
+store.dispatch(setStartDate(125));
+store.dispatch(setStartDate());
+store.dispatch(setEndtDate(129));
+store.dispatch(setEndtDate());
