@@ -3,7 +3,7 @@ import uuid from 'uuid';
 // ADD_EXPENSE,
 const addExpense = (
   { description = '',
-    notes = '', 
+    note = '', 
     amount = 0, 
     createdAt = 0 
   } = {}) => ({
@@ -11,7 +11,7 @@ const addExpense = (
   expense: {
     id: uuid(),
     description,
-    notes,
+    note,
     amount,
     createdAt
   }
