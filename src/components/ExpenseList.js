@@ -7,12 +7,11 @@ import ExpenseListItem from './ExpenseListItem';
 // Selector
 import selectExpenses from '../selectors/expenses';
 
- const ExpenseList = (props) => {
+export const ExpenseList = (props) => {
   return (
     <div>
-      <h1>ExpenseList</h1>
       {
-        props.expenses.map((expense, index) =><ExpenseListItem key={index} {...expense} />)
+        props.expenses.length === 0 ? (<p>No Expenses</p>) : (props.expenses.map((expense, index) =><ExpenseListItem key={index} {...expense} />))
       }
     </div>
   )
