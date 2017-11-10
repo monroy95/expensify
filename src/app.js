@@ -8,6 +8,9 @@ import configureStore from './store/configureStore';
 // Styles 
 import 'normalize.css/normalize.css'; // normalizing styles for all browsers
 import './styles/style.scss';
+// React-Dates
+import 'react-dates/initialize';
+import 'react-dates/lib/css/_datepicker.css';
 
 import { addExpense } from './actions/expenses';
 import { setTextFilter } from './actions/filters';
