@@ -12,7 +12,7 @@
     "dev-server": "webpack-dev-server",
     "test": "jest --config=jest.config.json",
     "start": "node server/server.js",
-    "heroku-postbuild": "yarn run webpack"
+    "heroku-postbuild": "yarn run build:prod"
   },
   "dependencies": {
     "enzyme": "^3.1.1",
@@ -29,7 +29,8 @@
     "react-router-dom": "^4.2.2",
     "react-test-renderer": "^16.1.0",
     "redux": "^3.7.2",
-    "uuid": "^3.1.0"
+    "uuid": "^3.1.0",
+    "webpack": "^3.8.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -46,7 +47,6 @@
     "node-sass": "^4.6.0",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.19.0",
-    "webpack": "^3.8.1",
     "webpack-dev-server": "^2.9.4"
   }
 }
