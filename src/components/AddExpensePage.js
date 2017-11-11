@@ -6,17 +6,29 @@ import ExpenseForm from './ExpenseForm';
 // action
 import { addExpense } from '../actions/expenses';
 
+export class AddExpensePage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.onSubmit = this.onSubmit.bind(this);
+  }
 
-const AddExpensePage = (props) => (
-  <div>
-    <h1>Add Expense:</h1>
-    <ExpenseForm
-      onSubmit={(expense) => {
-        props.dispatch(addExpense(expense));
-        props.history.push('/'); // Came back for the history
-      }}
-    />
-  </div>
-);
+  onSubmit(expense) {
+    this.props.onSubmit(expense);
+    this.props.history.push('/');
+  };
 
-export default connect()(AddExpensePage)
+  render() {
+    return (
+      <div>
+        <h1>Add Expense:</h1>
+        <ExpenseForm
+          onSubmit={this.onSubmit}
+        />
+    </div>
+    )
+  }
+}
+
+const mapDispatchToProps = (dispatch) => ({ onSubmit: (expese) => dispatch(addExpense(expense)) })
+
+export default connect(undefined, mapDispatchToProps)(AddExpensePage)
