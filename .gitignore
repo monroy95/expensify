@@ -2,3 +2,7 @@ node_modules
 src/tests/add.test.js
 public/*.js.map
 public/*.css.map
+
+# Build
+public/*.js
+public/*.css
