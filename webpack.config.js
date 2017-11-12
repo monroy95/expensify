@@ -9,7 +9,7 @@ module.exports = (env) => {
   return {
     entry: './src/app.js',
     output: {
-      path: path.join(__dirname, 'public'),
+      path: path.join(__dirname, 'public', 'dist'),
       filename: 'bundle.js'
     },
     module: {
@@ -43,8 +43,9 @@ module.exports = (env) => {
     plugins: [CSSExtract],
     devtool: isProduction ? 'source-map' : 'cheap-module-source-map',
     devServer: {
-      contentBase: path.join(__dirname, 'public'),
-      historyApiFallback: true // tell em the webserver to return to home if a 404 ocurr
+      contentBase: path.join(__dirname, 'public'), // where find the bundles styles and js
+      historyApiFallback: true, // tell em the webserver to return to home if a 404 ocurr
+      publicPath: '/dist/'
     }
   }
 }
