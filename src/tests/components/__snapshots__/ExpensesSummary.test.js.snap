@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should render correctly with 1 values 1`] = `
+<div>
+  <h1>
+    Viewing 
+    1
+     totalling 
+    $12.34
+     
+  </h1>
+</div>
+`;
+
+exports[`Should render correctly with multiple values 1`] = `
+<div>
+  <h1>
+    Viewing 
+    23
+     totalling 
+    $12,343,123,123,123.12
+     
+  </h1>
+</div>
+`;
