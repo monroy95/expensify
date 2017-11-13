@@ -12,7 +12,7 @@ exports[`Should render an Item from expenses with fixture data 1`] = `
   </Link>
   <p>
     <strong>
-      $1.95
+      $1.00
     </strong>
     -
     December0 31st, 1969
