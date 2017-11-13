@@ -11,6 +11,8 @@ import './styles/style.scss';
 // React-Dates
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
+// FirebaseDB
+import './firebase/firebase';
 
 import { addExpense } from './actions/expenses';
 import { setTextFilter } from './actions/filters';
