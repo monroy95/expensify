@@ -2,3 +2,6 @@ node_modules
 src/tests/add.test.js
 public/dist
 src/firebase/config.js
+
+
+src/playground/promises.js
