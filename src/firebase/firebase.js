@@ -1,12 +1,15 @@
-// import * as firebase from "firebase";
-// import moment from 'moment';
+import * as firebase from "firebase";
+import moment from 'moment';
 
-// // config of firebase
-// import config from './config'
+// config of firebase
+import config from './config'
 
-// firebase.initializeApp(config);
+firebase.initializeApp(config);
 
-// const database = firebase.database();
+const database = firebase.database();
+
+export { firebase, database as default };
+
 
 // // database.ref('notes').push({
 // //   title: 'Course topics',
