@@ -5,6 +5,24 @@ import config from './config'
 
 firebase.initializeApp(config);
 
-firebase.database().ref().set({
-  name: 'Alfredo Locon'
+const database = firebase.database();
+
+database.ref().set({
+  name: 'Locon Luis',
+  age: 24,
+  isSingle: true,
+  location: {
+    city: 'GTM',
+    country: 'GTM'
+  },
+  attributes: {
+    height: '1.80m',
+    weight: '120KG'
+  }
 });
+
+// To change an especific part of data in or db
+// database.ref('attributes').set({
+//   height: '1.81m',
+//   weight: '200KG'
+// })
