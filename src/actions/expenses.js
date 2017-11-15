@@ -12,7 +12,7 @@ import database from '../firebase/firebase';
 // function runs (has the ability  to dispatch other actions and do whatever it wants)
 
 // ADD_EXPENSE,
-const addExpense = (expense) => ({
+export const addExpense = (expense) => ({
   type: 'ADD_EXPENSE',
   expense
 })
@@ -33,20 +33,36 @@ export const startAddExpense = (expensesData = {}) => {
 }
 
 // REMOVE_EXPENSE,
-const removeExpense = ( { id } = {}) => ({
+export const removeExpense = ( { id } = {}) => ({
   type: 'REMOVE_EXPENSE',
   id
 })
 
 // EDIT_EXPENSE,
-const editExpense = (id, updates) => ({
+export const editExpense = (id, updates) => ({
   type: 'EDIT_EXPENSE',
   id,
   updates
 })
 
-export {
-  addExpense,
-  removeExpense,
-  editExpense
+// SET_EXPENSES
+export const setExpenses = (expenses) => ({
+  type: 'SET_EXPENSES',
+  expenses
+});
+
+export const startSetExpenses = () => {
+  return (dispatch) => {
+    return database.ref('expenses').once('value')
+      .then((snapshot) => {
+        const expenses = []; // to clean when this promise run
+        snapshot.forEach(childSnapshot => {
+          expenses.push({
+            id: childSnapshot.key,
+            ...childSnapshot.val()
+          })
+        })
+        return expenses // to get access to expenses on the next promise
+      }).then((expenses) => dispatch(setExpenses(expenses)) )
+  }
 }
