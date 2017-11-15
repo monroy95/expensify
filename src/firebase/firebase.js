@@ -1,10 +1,6 @@
 import * as firebase from "firebase";
 import moment from 'moment';
 
-<<<<<<< HEAD
-=======
-// config of firebase
->>>>>>> 6cc47d5225ef0dccdbef70f79204b95e224f519f
 const config = {
   apiKey: process.env.FIREBASE_API_KEY,
   authDomain: process.env.FIREBASE_AUTH_DOMAIN,
@@ -12,11 +8,7 @@ const config = {
   projectId: process.env.FIREBASE_PROJECT_ID,
   storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
   messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID
-<<<<<<< HEAD
 };
-=======
-  };
->>>>>>> 6cc47d5225ef0dccdbef70f79204b95e224f519f
 
 firebase.initializeApp(config);
 

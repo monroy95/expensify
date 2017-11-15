@@ -7,10 +7,6 @@ import database from '../../firebase/firebase';
 
 const createMockStore = configureMockStore([thunk]);
 
-<<<<<<< HEAD
-beforeEach(() => {
-  jasmine.DEFAULT_TIMEOUT_INTERVAL = 15000;
-=======
 beforeEach((done) => {
   jasmine.DEFAULT_TIMEOUT_INTERVAL = 15000;
   const expensesData = {};
@@ -18,7 +14,6 @@ beforeEach((done) => {
     expensesData[id] = { description, note, amount, createdAt }
   });
   database.ref('expenses').set(expensesData).then(() => done());
->>>>>>> 6cc47d5225ef0dccdbef70f79204b95e224f519f
 })
 
 test('Should setup remove expense action object', () => {
@@ -94,8 +89,6 @@ test('Should add expenses with default to database and store', (done) => {
 // end of test
 })
 
-<<<<<<< HEAD
-=======
 test('Should setup set expense action object with data', () => {
   const action = setExpenses(expenses);
   expect(action).toEqual({
@@ -125,4 +118,3 @@ test('Should fetch the expenses from firebase', (done) => {
       done();
     })
 })
->>>>>>> 6cc47d5225ef0dccdbef70f79204b95e224f519f
