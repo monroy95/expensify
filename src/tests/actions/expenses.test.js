@@ -6,6 +6,9 @@ import database from '../../firebase/firebase';
 
 const createMockStore = configureMockStore([thunk]);
 
++beforeEach(() => {
+  jasmine.DEFAULT_TIMEOUT_INTERVAL = 15000;
+})
 
 test('Should setup remove expense action object', () => {
   const action = removeExpense({ id: '123abc' });
