@@ -8,3 +8,5 @@ src/playground/promises.js
 
 .env.development
 .env.test
+
+/nothig
