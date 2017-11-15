@@ -1,13 +1,24 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import { startAddExpense, addExpense, editExpense, removeExpense } from '../../actions/expenses';
+import expensesReducer from '../../reducers/expenses';
+import { startAddExpense, addExpense, editExpense, removeExpense, setExpenses, startSetExpenses } from '../../actions/expenses';
 import expenses from '../fixtures/expenses';
 import database from '../../firebase/firebase';
 
 const createMockStore = configureMockStore([thunk]);
 
+<<<<<<< HEAD
 beforeEach(() => {
   jasmine.DEFAULT_TIMEOUT_INTERVAL = 15000;
+=======
+beforeEach((done) => {
+  jasmine.DEFAULT_TIMEOUT_INTERVAL = 15000;
+  const expensesData = {};
+  expenses.forEach(({ id, description, note, amount, createdAt }) => {
+    expensesData[id] = { description, note, amount, createdAt }
+  });
+  database.ref('expenses').set(expensesData).then(() => done());
+>>>>>>> 6cc47d5225ef0dccdbef70f79204b95e224f519f
 })
 
 test('Should setup remove expense action object', () => {
@@ -83,3 +94,35 @@ test('Should add expenses with default to database and store', (done) => {
 // end of test
 })
 
+<<<<<<< HEAD
+=======
+test('Should setup set expense action object with data', () => {
+  const action = setExpenses(expenses);
+  expect(action).toEqual({
+    type: 'SET_EXPENSES',
+    expenses
+  })
+})
+
+test('should set expenses', () => {
+  const action = {
+    type: 'SET_EXPENSES',
+    expenses: [expenses[1]]
+  };
+  const state = expensesReducer(expenses, action)
+  expect(state).toEqual([expenses[1]]);
+})
+
+test('Should fetch the expenses from firebase', (done) => {
+  const store = createMockStore({});
+  store.dispatch(startSetExpenses())
+    .then(() => {
+      const actions = store.getActions();
+      expect(actions[0]).toEqual({
+        type: 'SET_EXPENSES',
+        expenses
+      });
+      done();
+    })
+})
+>>>>>>> 6cc47d5225ef0dccdbef70f79204b95e224f519f
