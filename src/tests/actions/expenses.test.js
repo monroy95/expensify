@@ -6,6 +6,9 @@ import database from '../../firebase/firebase';
 
 const createMockStore = configureMockStore([thunk]);
 
+beforeEach(() => {
+  jasmine.DEFAULT_TIMEOUT_INTERVAL = 15000;
+})
 
 test('Should setup remove expense action object', () => {
   const action = removeExpense({ id: '123abc' });
@@ -40,8 +43,7 @@ test('Should add expenses to database and store', (done) => {
     note: 'This one is better',
     createdAt: 1000
   }
-  store.dispatch(startAddExpense(expensesData))
-    .then(() => {
+  store.dispatch(startAddExpense(expensesData)).then(() => {
       const actions = store.getActions();
       expect(actions[0]).toEqual({
         type: 'ADD_EXPENSE',
@@ -63,8 +65,7 @@ test('Should add expenses with default to database and store', (done) => {
   // start test
   const store = createMockStore({});
   const defaultData = { description: '', note: '', amount: 0, createdAt: 0 };
-  store.dispatch(startAddExpense({}))
-    .then(() => {
+  store.dispatch(startAddExpense({})).then(() => {
       const actions = store.getActions();
       expect(actions[0]).toEqual({
         type: 'ADD_EXPENSE',
@@ -75,24 +76,10 @@ test('Should add expenses with default to database and store', (done) => {
       });
       // promises chaining 
       return database.ref(`expenses/${actions[0].expense.id}`).once('value');
-    })
-    .then(snapshot => {
+    }).then(snapshot => {
       expect(snapshot.val()).toEqual(defaultData);
       done();
     });
 // end of test
 })
 
-// test('Should setup add expense action object with default values', () => {
-//   const action = addExpense();
-//   expect(action).toEqual({
-//     type: 'ADD_EXPENSE',
-//     expense: {
-//       id: expect.any(String),
-//       description: '',
-//       note: '',
-//       amount: 0,
-//       createdAt: 0
-//     }
-//   })
-// })
