@@ -8,13 +8,15 @@ import EditExpensePage from '../components/EditExpensePage';
 import HelpPage from '../components/HelpPage';
 import Error404 from '../components/Error404';
 import Header from '../components/Header';
+import LoginPage from '../components/LoginPage';
 
 const AppRouter = () => (
   <BrowserRouter>
     <div>
-      <Header />
+    <Header />
       <Switch>
-        <Route path="/" component={ExpenseDashboardPage} exact />
+        <Route path="/" component={LoginPage} exact />
+        <Route path="/dashboard" component={ExpenseDashboardPage} exact />
         <Route path="/create" component={addExpensePage} exact />
         <Route path="/edit/:id" component={EditExpensePage} exact />
         <Route path="/help" component={HelpPage} exact />

@@ -12,7 +12,7 @@ import './styles/style.scss';
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
 // FirebaseDB
-import './firebase/firebase';
+import { firebase } from './firebase/firebase';
 
 import { startSetExpenses } from './actions/expenses';
 import { setTextFilter } from './actions/filters';
@@ -23,8 +23,17 @@ const jsx = (
   <Provider store={store}>
     <AppRouter />
   </Provider>
-)
+);
 ReactDOM.render(<p>Loading...</p>, document.getElementById('app'));
 
 store.dispatch(startSetExpenses())
   .then(() => ReactDOM.render(jsx, document.getElementById('app')))
+
+// This help us to know the state of auth!
+firebase.auth().onAuthStateChanged((user) => {
+  if(user) {
+    console.log('Log in!')
+  } else {
+    console.log('Log out!')
+  }
+});
