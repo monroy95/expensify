@@ -2,7 +2,7 @@
 
 Expensify is an application to keep a track of the expenses that you could have in the month.
 
-To use it you need to have logged in with your google credentials
+To use it you need to have logged in with your google credentials Demo [here](http://expensify-with-react.herokuapp.com/)
 
 ![Imgur](https://i.imgur.com/ZHm1zKT.png)
 
