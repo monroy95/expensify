@@ -1,0 +1,15 @@
+.btn {
+  background: $blue;
+  border: none;
+  padding: $s-size;
+  font-size: $font-size-large;
+  font-weight: 300;
+  color: white;
+  display: inline-block;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.btn--link {
+  background: transparent;
+}
