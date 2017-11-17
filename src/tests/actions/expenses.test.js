@@ -1,5 +1,6 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
+import uuid from 'uuid';
 import expensesReducer from '../../reducers/expenses';
 import { 
   startAddExpense,
@@ -14,6 +15,8 @@ import {
 import expenses from '../fixtures/expenses';
 import database from '../../firebase/firebase';
 
+const uid = uuid();
+const defaultAuthState = { auth: { uid } };
 const createMockStore = configureMockStore([thunk]);
 
 beforeEach((done) => {
@@ -22,7 +25,7 @@ beforeEach((done) => {
   expenses.forEach(({ id, description, note, amount, createdAt }) => {
     expensesData[id] = { description, note, amount, createdAt }
   });
-  database.ref('expenses').set(expensesData).then(() => done());
+  database.ref(`users/${uid}/expenses`).set(expensesData).then(() => done());
 })
 
 test('Should setup remove expense action object', () => {
@@ -31,7 +34,7 @@ test('Should setup remove expense action object', () => {
 })
 
 test('Should remove expenses from firebase', (done) => {
-  const store = createMockStore({});
+  const store = createMockStore(defaultAuthState);
   const id = expenses[2].id;
   store.dispatch(startRemoveExpense({ id }))
     .then(() => {
@@ -40,7 +43,7 @@ test('Should remove expenses from firebase', (done) => {
         type: 'REMOVE_EXPENSE',
         id
       });
-      return database.ref(`expenses/${id}`).once('value')
+      return database.ref(`users/${uid}/expenses/${id}`).once('value')
     }).then((snapshot) => {
       expect(snapshot.val()).toBeFalsy();
       done();
@@ -60,7 +63,7 @@ test('Should setup edit expense action object', () => {
 })
 
 test('Should edit expenses from firebase', (done) => {
-  const store = createMockStore({});
+  const store = createMockStore(defaultAuthState);
   const id = expenses[0].id;
   const updates = { amount: 99922 }
   store.dispatch(startEditExpense(id, updates))
@@ -72,7 +75,7 @@ test('Should edit expenses from firebase', (done) => {
         updates
       });
 
-      return database.ref(`expenses/${id}`).once('value');
+      return database.ref(`users/${uid}/expenses/${id}`).once('value');
     }).then((snapshot) => {
       expect(snapshot.val().amount).toBe(updates.amount);
       done();
@@ -88,7 +91,7 @@ test('Should setup add expense action object with provided values', () => {
 })
 // Testing async actions
 test('Should add expenses to database and store', (done) => {
-  const store = createMockStore({});
+  const store = createMockStore(defaultAuthState);
   const expensesData = {
     description: 'Mouse',
     amount: 2333,
@@ -105,7 +108,7 @@ test('Should add expenses to database and store', (done) => {
         }
       });
       // promises chaining 
-      return database.ref(`expenses/${actions[0].expense.id}`).once('value');
+      return database.ref(`users/${uid}/expenses/${actions[0].expense.id}`).once('value');
     })
     .then(snapshot => {
       expect(snapshot.val()).toEqual(expensesData);
@@ -115,7 +118,7 @@ test('Should add expenses to database and store', (done) => {
 
 test('Should add expenses with default to database and store', (done) => {
   // start test
-  const store = createMockStore({});
+  const store = createMockStore(defaultAuthState);
   const defaultData = { description: '', note: '', amount: 0, createdAt: 0 };
   store.dispatch(startAddExpense({})).then(() => {
       const actions = store.getActions();
@@ -127,7 +130,7 @@ test('Should add expenses with default to database and store', (done) => {
         }
       });
       // promises chaining 
-      return database.ref(`expenses/${actions[0].expense.id}`).once('value');
+      return database.ref(`users/${uid}/expenses/${actions[0].expense.id}`).once('value');
     }).then(snapshot => {
       expect(snapshot.val()).toEqual(defaultData);
       done();
@@ -153,7 +156,7 @@ test('should set expenses', () => {
 })
 
 test('Should fetch the expenses from firebase', (done) => {
-  const store = createMockStore({});
+  const store = createMockStore(defaultAuthState);
   store.dispatch(startSetExpenses())
     .then(() => {
       const actions = store.getActions();
