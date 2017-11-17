@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { Router, Route, Switch } from 'react-router-dom';
+import createHistory from 'history/createBrowserHistory';
 // Components
 import ExpenseDashboardPage from '../components/ExpenseDashboardPage';
 import addExpensePage from '../components/AddExpensePage';
@@ -10,10 +11,12 @@ import Error404 from '../components/Error404';
 import Header from '../components/Header';
 import LoginPage from '../components/LoginPage';
 
+export const history = createHistory();
+
 const AppRouter = () => (
-  <BrowserRouter>
+  <Router history={history}>
     <div>
-    <Header />
+      <Header />
       <Switch>
         <Route path="/" component={LoginPage} exact />
         <Route path="/dashboard" component={ExpenseDashboardPage} exact />
@@ -23,7 +26,7 @@ const AppRouter = () => (
         <Route component={Error404} />
       </Switch>
     </div>
-  </BrowserRouter>
+  </Router>
 );
 
 export default AppRouter;
