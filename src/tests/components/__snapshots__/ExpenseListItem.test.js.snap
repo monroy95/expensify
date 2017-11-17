@@ -1,21 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Should render an Item from expenses with fixture data 1`] = `
-<div>
-  <Link
-    replace={false}
-    to="/edit/1"
-  >
-    <h3>
+<Link
+  className="list-item"
+  replace={false}
+  to="/edit/1"
+>
+  <div>
+    <h3
+      className="list-item__title"
+    >
       Gum
     </h3>
-  </Link>
-  <p>
-    <strong>
+    <span
+      className="list-item__sub-title"
+    >
+      December 31st, 1969
+    </span>
+  </div>
+  <div>
+    <h3
+      className="list-item__data"
+    >
       $1.00
-    </strong>
-    -
-    December 31st, 1969
-  </p>
-</div>
+    </h3>
+  </div>
+</Link>
 `;

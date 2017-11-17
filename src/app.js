@@ -11,6 +11,9 @@ import './styles/style.scss';
 // React-Dates
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
+// component
+import LoadingPage from './components/LoadingPage';
+
 // FirebaseDB
 import { firebase } from './firebase/firebase';
 
@@ -33,7 +36,7 @@ const renderApp = () => {
   }
 };
 
-ReactDOM.render(<p>Loading...</p>, document.getElementById('app'));
+ReactDOM.render(<LoadingPage />, document.getElementById('app'));
 
 // This help us to know the state of auth!
 firebase.auth().onAuthStateChanged((user) => {
