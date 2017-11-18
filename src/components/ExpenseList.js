@@ -7,7 +7,7 @@ import ExpenseListItem from './ExpenseListItem';
 // Selector
 import selectExpenses from '../selectors/expenses';
 
-export const ExpenseList = (props) => {
+const ExpenseList = (props) => {
   return (
     <div className="container">
       <div className="list-header">
@@ -24,11 +24,12 @@ export const ExpenseList = (props) => {
   )
 }
 
-const mapStateToProps = (state) => (
+const mapStateToProps = state => (
   {
-    expenses: selectExpenses(state.expenses, state.filters)
+    expenses: selectExpenses(state.expenses, state.filters),
   }
 );
 
+export { ExpenseList as ExpenseListComponent };
 
-export default connect(mapStateToProps)(ExpenseList)
+export default connect(mapStateToProps)(ExpenseList);

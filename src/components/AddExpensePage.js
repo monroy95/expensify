@@ -15,7 +15,7 @@ export class AddExpensePage extends React.Component {
   onSubmit(expense) {
     this.props.startAddExpense(expense);
     this.props.history.push('/');
-  };
+  }
 
   render() {
     return (
@@ -30,11 +30,12 @@ export class AddExpensePage extends React.Component {
             onSubmit={this.onSubmit}
           />
         </div>
-    </div>
-    )
+      </div>
+    );
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({ startAddExpense: (expense) => dispatch(startAddExpense(expense)) })
+const mapDispatchToProps = dispatch =>
+  ({ startAddExpense: expense => dispatch(startAddExpense(expense)) });
 
-export default connect(undefined, mapDispatchToProps)(AddExpensePage)
+export default connect(undefined, mapDispatchToProps)(AddExpensePage);

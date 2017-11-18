@@ -4,7 +4,7 @@ import moment from 'moment';
 import numeral from 'numeral';
 
 
-export const ExpenseListItem = ({id, description, amount, createdAt}) => {
+const ExpenseListItem = ({id, description, amount, createdAt}) => {
   return (
     <Link className="list-item" to={`/edit/${id}`}>
       <div>
@@ -18,4 +18,5 @@ export const ExpenseListItem = ({id, description, amount, createdAt}) => {
   )
 };
 
-export default ExpenseListItem
+export { ExpenseListItem as ExpenseListItemComponent };
+export default ExpenseListItem;

@@ -19,7 +19,6 @@ import { firebase } from './firebase/firebase';
 
 import { startSetExpenses } from './actions/expenses';
 import { login, logout } from './actions/auth';
-import getVisibleExpenses from './selectors/expenses';
 
 const store = configureStore();
 const jsx = (
@@ -30,7 +29,7 @@ const jsx = (
 
 let hasRendered = false;
 const renderApp = () => {
-  if(!hasRendered) {
+  if (!hasRendered) {
     ReactDOM.render(jsx, document.getElementById('app'));
     hasRendered = true;
   }
@@ -40,19 +39,19 @@ ReactDOM.render(<LoadingPage />, document.getElementById('app'));
 
 // This help us to know the state of auth!
 firebase.auth().onAuthStateChanged((user) => {
-  if(user) {
+  if (user) {
     // Here is login
     store.dispatch(login(user.uid))
     store.dispatch(startSetExpenses())
       .then(() => {
         renderApp();
-        if(history.location.pathname === '/') {
+        if (history.location.pathname === '/') {
           history.push('/dashboard');
-        };
+        }
       });
   } else {
     // Here is logout
-    store.dispatch(logout())
+    store.dispatch(logout());
     renderApp();
     history.push('/');
   }

@@ -6,7 +6,7 @@ import ExpenseForm from './ExpenseForm';
 // action
 import { startEditExpense, startRemoveExpense } from '../actions/expenses';
 
-export class EditExpensePage extends React.Component {
+class EditExpensePage extends React.Component {
   constructor(props) {
     super(props);
 
@@ -42,22 +42,21 @@ export class EditExpensePage extends React.Component {
           <button
             className="btn btn--warning"
             onClick={this.onRemove}
-          >Remove Expense</button>
+          >Remove Expense
+          </button>
         </div>
       </div>
     );
   };
 }
 
-const mapStateToProps = (state, props) => {
-  return {
-    expense: state.expenses.find(expense => expense.id === props.match.params.id)
-  }
-}
+const mapStateToProps = (state, props) =>
+  ({ expense: state.expenses.find(expense => expense.id === props.match.params.id) });
 
-const mapDispatchToProps = (dispatch, props) => ({
+const mapDispatchToProps = dispatch => ({
   startEditExpense: (id, expense) => dispatch(startEditExpense(id, expense)),
-  startRemoveExpense: (data) => dispatch(startRemoveExpense(data))
-})
+  startRemoveExpense: data => dispatch(startRemoveExpense(data)),
+});
 
+export { EditExpensePage as EditExpensePageComponent };
 export default connect(mapStateToProps, mapDispatchToProps)(EditExpensePage);

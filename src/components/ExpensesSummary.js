@@ -6,7 +6,7 @@ import numeral from 'numeral';
 import expensesTotal from '../selectors/expenses-total';
 import selectExpenses from '../selectors/expenses';
 
-export const ExpensesSummary = ({ expensesCount, total }) => {
+const ExpensesSummary = ({ expensesCount, total }) => {
   return (
     <div className="page-header">
       <div className="container">
@@ -17,7 +17,7 @@ export const ExpensesSummary = ({ expensesCount, total }) => {
       </div>
     </div>
   )
-}
+};
 
 const mapStateToProps = (state) => {
   const visibleExpenses = selectExpenses(state.expenses, state.filters);
@@ -28,6 +28,5 @@ const mapStateToProps = (state) => {
   }
 }
 
-
-
-export default connect(mapStateToProps)(ExpensesSummary)
+export { ExpensesSummary as ExpensesSummaryComponent };
+export default connect(mapStateToProps)(ExpensesSummary);
