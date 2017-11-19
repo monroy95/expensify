@@ -31,15 +31,15 @@ module.exports = (env) => {
     module: {
       rules: [
         {
-          test: /\.jsx?$/,
-          loader: 'eslint-loader',
           enforce: 'pre',
+          test: /\.js$/,
+          loader: 'eslint-loader',
           exclude: /(node_modules)/,
         },
         {
           loader: 'babel-loader',
           test: /\.js$/,
-          exclude: /node_modules/
+          exclude: /node_modules/,
         },
         {
           test: /\.s?css$/,
