@@ -1,7 +1,7 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 // reducers import
-import expensesReducer from '../reducers/expenses'
+import expensesReducer from '../reducers/expenses';
 import filtersReducer from '../reducers/filters';
 import authReducer from '../reducers/auth';
 
@@ -15,7 +15,7 @@ export default () => {
       auth: authReducer,
     }),
     composeEnhancers(applyMiddleware(thunk)),
-    // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() 
+    // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
     // to connect with redux dev tool if thunk not exist
   );
 

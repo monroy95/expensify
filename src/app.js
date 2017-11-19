@@ -1,16 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+// React-Dates
+import 'react-dates/initialize';
+import 'react-dates/lib/css/_datepicker.css';
+// Styles
+import 'normalize.css/normalize.css'; // normalizing styles for all browsers
+import './styles/style.scss';
 // Router
 import AppRouter, { history } from './routers/appRouter';
 // Store from redux
 import configureStore from './store/configureStore';
-// Styles 
-import 'normalize.css/normalize.css'; // normalizing styles for all browsers
-import './styles/style.scss';
-// React-Dates
-import 'react-dates/initialize';
-import 'react-dates/lib/css/_datepicker.css';
 // component
 import LoadingPage from './components/LoadingPage';
 
@@ -41,7 +41,7 @@ ReactDOM.render(<LoadingPage />, document.getElementById('app'));
 firebase.auth().onAuthStateChanged((user) => {
   if (user) {
     // Here is login
-    store.dispatch(login(user.uid))
+    store.dispatch(login(user.uid));
     store.dispatch(startSetExpenses())
       .then(() => {
         renderApp();

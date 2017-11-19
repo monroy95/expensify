@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { connect } from 'react-redux';
 
 // Component
@@ -17,12 +17,12 @@ const ExpenseList = (props) => {
       </div>
       <div className="list-body">
         {
-          props.expenses.length === 0 ? (<div className="list-item list-item--empty"><span>No Expenses</span></div>) : (props.expenses.map((expense, index) =><ExpenseListItem key={index} {...expense} />))
+          props.expenses.length === 0 ? (<div className="list-item list-item--empty"><span>No Expenses</span></div>) : (props.expenses.map(expense => <ExpenseListItem key={expense.id} {...expense} />))
         }
       </div>
     </div>
-  )
-}
+  );
+};
 
 const mapStateToProps = state => (
   {

@@ -4,7 +4,12 @@ import moment from 'moment';
 import numeral from 'numeral';
 
 
-const ExpenseListItem = ({id, description, amount, createdAt}) => {
+const ExpenseListItem = ({
+  id,
+  description,
+  amount,
+  createdAt,
+}) => {
   return (
     <Link className="list-item" to={`/edit/${id}`}>
       <div>
@@ -15,7 +20,7 @@ const ExpenseListItem = ({id, description, amount, createdAt}) => {
         <h3 className="list-item__data">{numeral(amount / 100).format('$0,0.00')}</h3>
       </div>
     </Link>
-  )
+  );
 };
 
 export { ExpenseListItem as ExpenseListItemComponent };

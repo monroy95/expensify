@@ -16,13 +16,13 @@ class EditExpensePage extends React.Component {
 
   onSubmit(expense) {
     // props.dispatch(editExpense(props.expense.id, expense))
-    this.props.startEditExpense(this.props.expense.id, expense)
+    this.props.startEditExpense(this.props.expense.id, expense);
     this.props.history.push('/'); // Came back for the history
   }
 
   onRemove() {
     // props.dispatch(removeExpense({ id: props.expense.id }))
-    this.props.startRemoveExpense({ id: this.props.expense.id })
+    this.props.startRemoveExpense({ id: this.props.expense.id });
     this.props.history.push('/'); // Came back for the history
   }
 
@@ -47,7 +47,7 @@ class EditExpensePage extends React.Component {
         </div>
       </div>
     );
-  };
+  }
 }
 
 const mapStateToProps = (state, props) =>

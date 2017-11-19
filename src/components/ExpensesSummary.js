@@ -10,13 +10,13 @@ const ExpensesSummary = ({ expensesCount, total }) => {
   return (
     <div className="page-header">
       <div className="container">
-        <h1 className="page-header__title">Viewing <span>{ expensesCount }</span> totalling <span>{ numeral(total / 100).format('$0,0.00')  }</span> </h1> 
+        <h1 className="page-header__title">Viewing <span>{ expensesCount }</span> totalling <span>{ numeral(total / 100).format('$0,0.00') }</span></h1>
         <div className="page-header__actions">
           <Link to="/create" className="btn">Add Expense</Link>
         </div>
       </div>
     </div>
-  )
+  );
 };
 
 const mapStateToProps = (state) => {
@@ -24,9 +24,9 @@ const mapStateToProps = (state) => {
 
   return {
     expensesCount: visibleExpenses.length,
-    total: expensesTotal(visibleExpenses)
-  }
-}
+    total: expensesTotal(visibleExpenses),
+  };
+};
 
 export { ExpensesSummary as ExpensesSummaryComponent };
 export default connect(mapStateToProps)(ExpensesSummary);

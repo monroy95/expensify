@@ -111,7 +111,7 @@ export { firebase, googleAuthProvider, database as default };
 // //   'location/city': 'Seattle'
 // // })
 
-// // database.ref().update({ 
+// // database.ref().update({
 // //   job: 'Manager',
 // //   'location/city': 'CDMX' // to update a property on a child object
 // // });
