@@ -26,16 +26,10 @@ module.exports = (env) => {
     entry: ['babel-polyfill', './src/app.js'], // Babel polyfill for not supported browsers
     output: {
       path: path.join(__dirname, 'public', 'dist'),
-      filename: 'bundle.js'
+      filename: 'bundle.js',
     },
     module: {
       rules: [
-        {
-          enforce: 'pre',
-          test: /\.js$/,
-          loader: 'eslint-loader',
-          exclude: /(node_modules)/,
-        },
         {
           loader: 'babel-loader',
           test: /\.js$/,
